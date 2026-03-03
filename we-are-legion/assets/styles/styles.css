@@ -1,7 +1,23 @@
-@import "https://unpkg.com/open-props";
-@import "https://unpkg.com/open-props/normalize.min.css";
-@import "https://unpkg.com/open-props/buttons.min.css";
+* { padding: 0; margin: 0; }
+      html, body { height: 100%; }
+      body { display: flex; }
 
-body {
-  background: var(--gray-12);
-}
+      #google-map {
+         margin: 0 auto 0 auto;
+         border: 1px solid #ccc;
+         width: 700px;
+         height: 500px;
+         align-self: center;
+      }
+      .feh-content * {
+         font-family: 'uniform';
+      }
+      .feh-content h3 {
+         font-weight: 500;
+         margin-bottom: 10px;
+      }
+      .feh-content p {
+         font-style: normal;
+         line-height: 16px;
+         font-weight: 400;
+      }
