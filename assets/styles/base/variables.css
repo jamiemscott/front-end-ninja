@@ -1,0 +1,37 @@
+/* =============================================================================
+   BASE — variables.css
+   Cyberpunk design tokens. Replaces the Open Props palette aliases.
+   ============================================================================= */
+
+:root {
+  /* --- Colour palette --- */
+  --neon-cyan:    #00f5ff;
+  --neon-pink:    #ff0080;
+  --neon-red:     #cc1a1a;
+  --neon-orange:  #ff4400;
+  --neon-purple:  #c830ff;
+  --status-green: #00ff88;
+
+  /* --- Backgrounds --- */
+  --dark-void:    #020408;
+  --dark-surface: #060d14;
+  --dark-panel:   #0a1520;
+
+  /* --- Text --- */
+  --text-primary: #e8f4f8;
+  --text-muted:   #5a9aae;
+
+  /* --- Effects --- */
+  --grid-line: rgba(0, 245, 255, 0.06);
+
+  /* --- Layout --- */
+  --layout-max-width:      1400px;
+  --layout-gutter:         40px;
+  --section-block-padding: 100px;
+
+  /* --- Components --- */
+  --header-height: 4rem;
+
+  /* --- Motion --- */
+  --transition-base: 300ms ease;
+}

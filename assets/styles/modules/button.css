@@ -1,0 +1,71 @@
+/* =============================================================================
+   MODULES — button.css
+   Cyberpunk clipped-corner button components.
+   ============================================================================= */
+
+/* Primary — cyan neon border with shimmer sweep */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2), inset 0 0 20px rgba(0, 245, 255, 0.05);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  &:hover {
+    background: rgba(0, 245, 255, 0.08);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.4), inset 0 0 30px rgba(0, 245, 255, 0.1);
+    color: #fff;
+
+    &::before {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Secondary — pink neon border */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(255, 0, 128, 0.4);
+  color: rgba(255, 0, 128, 0.8);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  cursor: none;
+  transition: all var(--transition-base);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+
+  &:hover {
+    background: rgba(255, 0, 128, 0.08);
+    box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+  }
+}

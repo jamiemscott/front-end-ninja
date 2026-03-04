@@ -1,0 +1,66 @@
+/* =============================================================================
+   LAYOUT — grid.css
+   Page-level layout primitives: container, sections, and section headers.
+   ============================================================================= */
+
+/* Container */
+.container {
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+  position: relative;
+  z-index: 10;
+}
+
+/* Sections */
+.section {
+  padding: var(--section-block-padding) 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Section header */
+.section-header {
+  margin-bottom: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.section-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--neon-pink);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--neon-pink);
+    box-shadow: 0 0 6px var(--neon-pink);
+  }
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* Large ghost counter shown at the end of the section header flex row */
+.section-counter {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5rem;
+  color: rgba(0, 245, 255, 0.05);
+  line-height: 1;
+  margin-bottom: -10px;
+}

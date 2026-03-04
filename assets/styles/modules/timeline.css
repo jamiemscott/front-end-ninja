@@ -1,0 +1,90 @@
+/* =============================================================================
+   MODULES — timeline.css
+   Vertical experience timeline with neon gradient spine and clipped-corner cards.
+   ============================================================================= */
+
+.timeline {
+  position: relative;
+  padding-left: 60px;
+
+  /* Gradient spine */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 48px;
+  padding: 28px 32px;
+  background: var(--dark-surface);
+  border: 1px solid rgba(0, 245, 255, 0.06);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  transition: all var(--transition-base);
+
+  &:hover {
+    border-color: rgba(0, 245, 255, 0.2);
+    background: var(--dark-panel);
+  }
+}
+
+/* Dot on the spine */
+.timeline-dot {
+  position: absolute;
+  left: -52px;
+  top: 32px;
+  width: 10px;
+  height: 10px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.1), 0 0 15px var(--neon-cyan);
+}
+
+.timeline-dot--pink {
+  background: var(--neon-pink);
+  box-shadow: 0 0 0 4px rgba(255, 0, 128, 0.1), 0 0 15px var(--neon-pink);
+}
+
+.timeline-dot--purple {
+  background: var(--neon-purple);
+  box-shadow: 0 0 0 4px rgba(200, 48, 255, 0.1), 0 0 15px var(--neon-purple);
+}
+
+.timeline-date {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--neon-pink);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+
+.timeline-role {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.timeline-company {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  margin-bottom: 14px;
+  letter-spacing: 0.1em;
+}
+
+.timeline-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 300;
+}

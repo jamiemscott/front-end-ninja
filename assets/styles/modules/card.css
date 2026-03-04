@@ -1,0 +1,241 @@
+/* =============================================================================
+   MODULES — card.css
+   Skill matrix cards and project cards with cyberpunk clipped-corner aesthetic.
+   ============================================================================= */
+
+/* ─── Skill matrix ─── */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(0, 245, 255, 0.08);
+  border: 1px solid rgba(0, 245, 255, 0.08);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), transparent, rgba(255, 0, 128, 0.15));
+    z-index: -1;
+  }
+}
+
+.skill-card {
+  background: var(--dark-surface);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  &:hover {
+    background: var(--dark-panel);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.skill-card-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.5));
+}
+
+.skill-card-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--neon-cyan);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.skill-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.skill-bar {
+  margin-top: 20px;
+  height: 2px;
+  background: rgba(0, 245, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes barLoad {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  box-shadow: 0 0 10px var(--neon-cyan);
+  position: relative;
+  animation: barLoad 1.5s ease forwards;
+  transform-origin: left;
+}
+
+.skill-bar-percentage {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--neon-cyan);
+}
+
+/* ─── Project cards ─── */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--dark-surface);
+  border: 1px solid rgba(0, 245, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: all 0.4s ease;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+
+  &:hover {
+    border-color: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.1), inset 0 0 40px rgba(0, 245, 255, 0.03);
+    transform: translateY(-4px);
+  }
+}
+
+/* Decorative gradient visuals */
+.project-card-visual {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pv1 { background: linear-gradient(135deg, #001a2e 0%, #003358 50%, #001a2e 100%); }
+.pv2 { background: linear-gradient(135deg, #1a0020 0%, #340040 50%, #1a0020 100%); }
+.pv3 { background: linear-gradient(135deg, #001520 0%, #002840 50%, #001520 100%); }
+.pv4 { background: linear-gradient(135deg, #200010 0%, #400020 50%, #200010 100%); }
+
+.pv-photo {
+  padding: 0;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: saturate(0.9) contrast(1.05);
+  }
+}
+
+.project-visual-glyph {
+  font-size: 6rem;
+  opacity: 0.3;
+  filter: blur(2px);
+  font-family: serif;
+}
+
+.project-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0, 245, 255, 0.03) 40px, rgba(0, 245, 255, 0.03) 41px),
+    repeating-linear-gradient(0deg,  transparent, transparent 40px, rgba(0, 245, 255, 0.03) 40px, rgba(0, 245, 255, 0.03) 41px);
+}
+
+.project-card-content {
+  padding: 24px 28px 28px;
+}
+
+/* Tag strip */
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.project-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  padding: 3px 10px;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+.tag-cyan   { border-color: rgba(0, 245, 255, 0.4); color: var(--neon-cyan); }
+.tag-pink   { border-color: rgba(255, 0, 128, 0.4); color: var(--neon-pink); }
+.tag-purple { border-color: rgba(191, 0, 255, 0.4); color: var(--neon-purple); }
+.tag-orange { border-color: rgba(255, 68, 0, 0.4);  color: var(--neon-orange); }
+
+.project-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+
+.project-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+
+  &::after {
+    content: '→';
+    transition: transform var(--transition-base);
+  }
+
+  &:hover {
+    gap: 12px;
+    text-shadow: 0 0 10px var(--neon-cyan);
+
+    &::after {
+      transform: translateX(4px);
+    }
+  }
+}

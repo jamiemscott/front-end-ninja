@@ -1,0 +1,117 @@
+/* =============================================================================
+   LAYOUT — header.css
+   Fixed cyberpunk navigation header with neon glow and hex-logo animation.
+   ============================================================================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  background: linear-gradient(180deg, rgba(2, 4, 8, 0.95) 0%, transparent 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.08);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Spinning hex prefix */
+@keyframes hexSpin {
+  to { transform: rotate(360deg); }
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.8), 0 0 40px rgba(0, 245, 255, 0.4);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &::before {
+    content: '⬡';
+    font-size: 1.4rem;
+    animation: hexSpin 8s linear infinite;
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--neon-cyan);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+    box-shadow: 0 0 8px var(--neon-cyan);
+  }
+
+  &:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Availability pill */
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--status-green);
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--status-green);
+  border-radius: 50%;
+  animation: statusPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--status-green);
+  flex-shrink: 0;
+}

@@ -1,0 +1,58 @@
+/* =============================================================================
+   STATE — states.css
+   JS-toggled states, accessibility utilities, and fade-in entry animations.
+   ============================================================================= */
+
+/* Accessibility: visually hidden but available to screen readers */
+.is-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link: hidden until focused by keyboard */
+.skip-link:focus-visible {
+  all: unset;
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--neon-cyan);
+  color: var(--dark-void);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Display utilities */
+.is-hidden {
+  display: none;
+}
+
+/* ─── Fade-in entry animation ─── */
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Staggered delays */
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.3s; }
+.d4 { animation-delay: 0.4s; }
+.d5 { animation-delay: 0.5s; }

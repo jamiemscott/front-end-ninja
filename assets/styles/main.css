@@ -1,0 +1,37 @@
+/* =============================================================================
+   FRONT-END NINJA — main.css
+   Entry point. Layer order declared here; all partials imported into layers.
+   Layer priority (lowest → highest): open-props → base → layout → modules → state
+   ============================================================================= */
+
+@layer open-props.vars, open-props.normalize, base, layout, modules, state;
+
+/* --- Vendor --- */
+@import url("https://unpkg.com/open-props") layer(open-props.vars);
+@import url("https://unpkg.com/open-props/normalize.min.css") layer(open-props.normalize);
+
+/* --- Base --- */
+@import "base/variables.css" layer(base);
+@import "base/reset.css" layer(base);
+@import "base/typography.css" layer(base);
+
+/* --- Layout --- */
+@import "layout/grid.css" layer(layout);
+@import "layout/header.css" layer(layout);
+@import "layout/nav-mobile.css" layer(layout);
+@import "layout/hero.css" layer(layout);
+@import "layout/footer.css" layer(layout);
+
+/* --- Modules --- */
+@import "modules/effects.css" layer(modules);
+@import "modules/card.css" layer(modules);
+@import "modules/button.css" layer(modules);
+@import "modules/badge.css" layer(modules);
+@import "modules/timeline.css" layer(modules);
+@import "modules/contact.css" layer(modules);
+@import "modules/hero-mobile.css" layer(modules);
+@import "modules/skills-mobile.css" layer(modules);
+@import "modules/contact-mobile.css" layer(modules);
+
+/* --- State --- */
+@import "state/states.css" layer(state);

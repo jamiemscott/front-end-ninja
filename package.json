@@ -1,1 +1,20 @@
-{}
+{
+  "name": "cyberpunk-portfolio",
+  "version": "3.2.0",
+  "description": "Front End Ninja — Jamie Scott cyberpunk portfolio",
+  "type": "module",
+  "scripts": {
+    "build": "gulp sass",
+    "watch": "gulp",
+    "start": "gulp"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-rename": "^2.1.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.97.3"
+  }
+}

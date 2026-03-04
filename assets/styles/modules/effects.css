@@ -1,0 +1,138 @@
+/* =============================================================================
+   MODULES — effects.css
+   Ambient background effects: grid overlay, scanlines, glow orbs, data streams,
+   and the custom CSS cursor dot + ring.
+   ============================================================================= */
+
+/* ─── Background grid + scanlines ─── */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Floating glow orbs ─── */
+
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(80px, 60px); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-60px, -80px); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(40px, -50px); }
+  66%       { transform: translate(-40px, 30px); }
+}
+
+.glow-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.06) 0%, transparent 70%);
+  top: -200px;
+  left: -200px;
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+
+.glow-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(204, 26, 26, 0.07) 0%, transparent 70%);
+  bottom: 20%;
+  right: -150px;
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+
+.glow-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(191, 0, 255, 0.04) 0%, transparent 70%);
+  top: 40%;
+  left: 30%;
+  animation: orbFloat3 18s ease-in-out infinite;
+}
+
+/* ─── Vertical data streams ─── */
+
+.data-stream {
+  position: fixed;
+  top: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--neon-cyan), transparent);
+  opacity: 0.3;
+  animation: dataStream linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes dataStream {
+  from { transform: translateY(-100vh); }
+  to   { transform: translateY(100vh); }
+}
+
+/* ─── Custom cursor ─── */
+
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+  mix-blend-mode: screen;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0, 245, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+}
+
+/* Restore default cursor when hovering interactive elements via JS,
+   but also ensure keyboard focus rings still show */
+:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 3px;
+}

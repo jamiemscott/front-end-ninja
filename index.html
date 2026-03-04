@@ -1,28 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNBD5TF3TS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-KNBD5TF3TS');
   </script>
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Front-End Ninja, the personal repository of Jamie Scott containing his projects and code examples.">
+  <meta name="description" content="Jamie Scott — Senior Front End Developer based in Leeds, UK. 13+ years specialising in WCAG accessibility, Drupal, and OutSystems.">
 
-  <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Front-End Ninja | Jamie Scott">
+  <meta property="og:description" content="Senior Front End Developer. 13+ years specialising in WCAG accessibility, Drupal, and OutSystems.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_1200/code-ninja/code-ninja-bg-1.jpg">
 
-  <link rel="stylesheet" href="https://unpkg.com/open-props/normalize.min.css"/>
-  <link rel="stylesheet" href="assets/styles/styles.css">
+  <!-- Favicon (ninja emoji) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥷</text></svg>">
 
-  <title>Front-End Ninja - The personal repository of Jamie Scott</title>
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://res.cloudinary.com">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Styles — Open Props + SMACSS partials via main.css @layer -->
+  <link rel="stylesheet" href="assets/styles/main.css">
+
+  <title>FRONT END NINJA // Jamie Scott</title>
 </head>
 <body>
-  <h1>Front-End Ninja</h1>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Ambient glow orbs -->
+  <div class="glow-orb glow-orb-1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-2" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-3" aria-hidden="true"></div>
+
+  <!-- Data streams -->
+  <div class="data-stream" style="left:15%;height:200px;animation-duration:6s;animation-delay:-2s" aria-hidden="true"></div>
+  <div class="data-stream" style="left:35%;height:150px;animation-duration:8s;animation-delay:-4s" aria-hidden="true"></div>
+  <div class="data-stream" style="left:65%;height:250px;animation-duration:7s;animation-delay:-1s" aria-hidden="true"></div>
+  <div class="data-stream" style="left:85%;height:180px;animation-duration:5s;animation-delay:-3s" aria-hidden="true"></div>
+
+  <a href="#main-content" class="skip-link is-visually-hidden">Skip to main content</a>
+
+  <!-- =====================================================================
+       HEADER
+  ====================================================================== -->
+  <header class="site-header" role="banner">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/" class="nav-logo" aria-label="Front-End Ninja — home">FRONT.END.NINJA</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-status" aria-label="Status: available for hire">
+        <div class="status-dot" aria-hidden="true"></div>
+        <span>AVAILABLE FOR HIRE</span>
+      </div>
+      <button class="nav-hamburger" popovertarget="nav-drawer"
+              aria-label="Open navigation" aria-haspopup="dialog">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile nav drawer (Popover API) -->
+  <div id="nav-drawer" class="nav-drawer" popover>
+    <button class="nav-drawer-close" popovertarget="nav-drawer"
+            popovertargetaction="hide" aria-label="Close navigation">✕</button>
+    <ul class="nav-drawer-links" role="list">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- =====================================================================
+       MAIN
+  ====================================================================== -->
+  <main id="main-content">
+
+    <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="kanji-watermark" aria-hidden="true">忍者</div>
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left: copy -->
+          <div>
+            <div class="hero-eyebrow fade-in" aria-hidden="true">
+              <div class="hero-eyebrow-line"></div>
+              <span class="hero-eyebrow-text">Senior Front End Developer // Leeds, UK</span>
+            </div>
+            <div class="ja-accent fade-in d1" aria-hidden="true">フロントエンドニンジャ</div>
+            <h1 class="hero-title fade-in d1" id="hero-title">
+              <span class="hero-title-main">JAMIE</span>
+              <span class="hero-title-accent glitch" data-text="SCOTT">SCOTT</span>
+              <span class="hero-title-sub">// FRONT END NINJA</span>
+            </h1>
+            <p class="hero-description fade-in d2">13+ years engineering exceptional digital experiences. Specialising in WCAG accessibility, Drupal, and OutSystems — where precision meets artistry at the edge of what's possible.</p>
+            <div class="hero-cta-group fade-in d3">
+              <a href="#projects" class="btn-primary">↗ VIEW WORK</a>
+              <a href="#contact" class="btn-secondary">✉ INITIATE CONTACT</a>
+            </div>
+            <div class="hero-stats fade-in d4" aria-label="Career highlights">
+              <div class="stat-item">
+                <span class="stat-value">13+</span>
+                <span class="stat-label">Years Active</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">50+</span>
+                <span class="stat-label">Projects Deployed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">AAA</span>
+                <span class="stat-label">WCAG Certified</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">OS11</span>
+                <span class="stat-label">Certified Dev</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: photo panel -->
+          <div class="hero-visual fade-in d3">
+            <div class="profile-frame">
+              <div class="corner-deco corner-tl" aria-hidden="true"></div>
+              <div class="corner-deco corner-tr" aria-hidden="true"></div>
+              <div class="corner-deco corner-bl" aria-hidden="true"></div>
+              <div class="corner-deco corner-br" aria-hidden="true"></div>
+              <div class="photo-outer">
+                <div class="photo-bg">
+                  <img
+                    class="photo-img"
+                    src="https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_960/code-ninja/code-ninja-bg-1.jpg"
+                    alt="Masked figure coding at a desk illuminated by a red and cyan neon cityscape"
+                    width="960"
+                    height="660"
+                  >
+                  <div class="photo-overlay" aria-hidden="true"></div>
+                  <div class="photo-scan" aria-hidden="true"></div>
+                  <div class="photo-beam" aria-hidden="true"></div>
+                  <div class="photo-red-line" aria-hidden="true"></div>
+                  <div class="photo-hud-tl" aria-hidden="true">
+                    SYS // JAMIE-SCOTT-V2<br>
+                    NODE // LEEDS-UK-53.7N<br>
+                    STATUS // <span class="hud-blink">ACTIVE</span>
+                  </div>
+                  <div class="photo-hud-br" aria-hidden="true">
+                    SPEC // FRONT-END-NINJA<br>
+                    YRS // 13+<br>
+                    WCAG // AAA
+                  </div>
+                </div>
+              </div>
+              <div class="profile-badge" aria-hidden="true">// FRONT-END NINJA //</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ────────────────────────────────────────────────────────── -->
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag" aria-hidden="true">Core Competencies</div>
+            <h2 class="section-title" id="skills-title">SKILL MATRIX</h2>
+          </div>
+          <div class="section-counter" aria-hidden="true">01</div>
+        </div>
+
+        <div class="skills-grid" role="list">
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">♿</span>
+            <div class="skill-card-name">WCAG Accessibility</div>
+            <p class="skill-card-desc">WCAG 2.1 AA/AAA compliance, screen reader testing, keyboard navigation, and inclusive design patterns.</p>
+            <div class="skill-bar" role="img" aria-label="WCAG Accessibility proficiency: 95%">
+              <div class="skill-bar-fill" style="width:95%"><span class="skill-bar-percentage" aria-hidden="true">95%</span></div>
+            </div>
+          </div>
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">⚡</span>
+            <div class="skill-card-name">OutSystems 11</div>
+            <p class="skill-card-desc">Enterprise-grade application development, CSS layer management, and Front End Specialist certification preparation.</p>
+            <div class="skill-bar" role="img" aria-label="OutSystems 11 proficiency: 90%">
+              <div class="skill-bar-fill" style="width:90%"><span class="skill-bar-percentage" aria-hidden="true">90%</span></div>
+            </div>
+          </div>
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">🔷</span>
+            <div class="skill-card-name">Drupal CMS</div>
+            <p class="skill-card-desc">Custom theming, module development, performance optimisation, and enterprise content management.</p>
+            <div class="skill-bar" role="img" aria-label="Drupal CMS proficiency: 88%">
+              <div class="skill-bar-fill" style="width:88%"><span class="skill-bar-percentage" aria-hidden="true">88%</span></div>
+            </div>
+          </div>
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">✦</span>
+            <div class="skill-card-name">CSS / Sass / SMACSS</div>
+            <p class="skill-card-desc">Modern CSS, @layer cascade control, custom properties, logical properties, and SMACSS architecture.</p>
+            <div class="skill-bar" role="img" aria-label="CSS, Sass, SMACSS proficiency: 97%">
+              <div class="skill-bar-fill" style="width:97%"><span class="skill-bar-percentage" aria-hidden="true">97%</span></div>
+            </div>
+          </div>
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">⟨/⟩</span>
+            <div class="skill-card-name">JavaScript / Gulp</div>
+            <p class="skill-card-desc">Vanilla JS, DOM APIs, automated build pipelines with Gulp, and performance-focused scripting.</p>
+            <div class="skill-bar" role="img" aria-label="JavaScript and Gulp proficiency: 82%">
+              <div class="skill-bar-fill" style="width:82%"><span class="skill-bar-percentage" aria-hidden="true">82%</span></div>
+            </div>
+          </div>
+
+          <div class="skill-card" role="listitem">
+            <span class="skill-card-icon" aria-hidden="true">◎</span>
+            <div class="skill-card-name">Performance &amp; UX</div>
+            <p class="skill-card-desc">Core Web Vitals optimisation, perceived performance techniques, and user experience refinement.</p>
+            <div class="skill-bar" role="img" aria-label="Performance and UX proficiency: 91%">
+              <div class="skill-bar-fill" style="width:91%"><span class="skill-bar-percentage" aria-hidden="true">91%</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Projects ──────────────────────────────────────────────────────── -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag" aria-hidden="true">Selected Work</div>
+            <h2 class="section-title" id="projects-title">PROJECTS</h2>
+          </div>
+          <div class="section-counter" aria-hidden="true">02</div>
+        </div>
+
+        <div class="projects-grid">
+
+          <article class="project-card">
+            <div class="project-card-visual pv-photo">
+              <img
+                src="assets/images/projects/we-are-legion.jpg"
+                alt="We Are Legion interactive map showing custom markers on a dark-styled Google Map"
+                loading="lazy"
+                width="800"
+                height="220"
+              >
+              <div class="project-visual-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags" aria-label="Technologies used">
+                <span class="project-tag tag-cyan">Google Maps API</span>
+                <span class="project-tag tag-pink">JavaScript</span>
+                <span class="project-tag tag-purple">CSS</span>
+              </div>
+              <h3 class="project-title">WE ARE LEGION</h3>
+              <p class="project-desc">An interactive Google Maps experience built for the We Are Legion community, featuring custom styled maps and location markers.</p>
+              <a href="https://we-are-legion.front-end-ninja.co.uk/" class="project-link" target="_blank" rel="noopener noreferrer">EXPLORE PROJECT</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card-visual pv1">
+              <div class="project-visual-glyph" aria-hidden="true">忍</div>
+              <div class="project-visual-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags" aria-label="Technologies used">
+                <span class="project-tag tag-cyan">HTML/CSS</span>
+                <span class="project-tag tag-pink">Gulp</span>
+                <span class="project-tag tag-purple">Netlify</span>
+              </div>
+              <h3 class="project-title">FRONT-END NINJA PORTFOLIO</h3>
+              <p class="project-desc">Cyberpunk-inspired portfolio featuring multi-layer CSS gradients, SMACSS architecture, and automated Gulp build pipeline.</p>
+              <a href="https://outsystems.front-end-ninja.co.uk" class="project-link" target="_blank" rel="noopener noreferrer">EXPLORE PROJECT</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card-visual pv3">
+              <div class="project-visual-glyph" aria-hidden="true">株</div>
+              <div class="project-visual-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags" aria-label="Technologies used">
+                <span class="project-tag tag-cyan">OutSystems 11</span>
+                <span class="project-tag tag-orange">CSS @layer</span>
+              </div>
+              <h3 class="project-title">OUTSYSTEMS ENTERPRISE APP</h3>
+              <p class="project-desc">Complex enterprise web application built on OutSystems 11, implementing advanced CSS organisation with custom stylesheet loading order and CSS layer priority management.</p>
+              <a href="#" class="project-link">EXPLORE PROJECT</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card-visual pv2">
+              <div class="project-visual-glyph" aria-hidden="true">財</div>
+              <div class="project-visual-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags" aria-label="Technologies used">
+                <span class="project-tag tag-cyan">Drupal</span>
+                <span class="project-tag tag-pink">WCAG AA</span>
+                <span class="project-tag tag-purple">Performance</span>
+              </div>
+              <h3 class="project-title">CHARLES STANLEY DIRECT</h3>
+              <p class="project-desc">Financial services platform with full accessibility compliance, custom Drupal theming, and performance-optimised frontend delivering exceptional investor UX.</p>
+              <a href="#" class="project-link">EXPLORE PROJECT</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Experience ────────────────────────────────────────────────────── -->
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag" aria-hidden="true">Career Log</div>
+            <h2 class="section-title" id="experience-title">EXPERIENCE</h2>
+          </div>
+          <div class="section-counter" aria-hidden="true">03</div>
+        </div>
+
+        <ol class="timeline" role="list">
+
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <p class="timeline-date"><time datetime="2023">2023</time> – PRESENT</p>
+            <h3 class="timeline-role">SENIOR FRONT END DEVELOPER</h3>
+            <p class="timeline-company">// UNIPRO LTD</p>
+            <p class="timeline-desc">Leading frontend architecture on OutSystems 11 enterprise applications. Pioneering accessibility standards, implementing advanced CSS techniques, and mentoring developers in modern web practices.</p>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot timeline-dot--pink" aria-hidden="true"></div>
+            <p class="timeline-date"><time datetime="2019">2019</time> – <time datetime="2023">2023</time></p>
+            <h3 class="timeline-role">FRONT END DEVELOPER</h3>
+            <p class="timeline-company">// CHARLES STANLEY DIRECT</p>
+            <p class="timeline-desc">Delivered WCAG-compliant financial web applications serving thousands of investors. Spearheaded accessibility audit programmes and established front-end coding standards across the organisation.</p>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot timeline-dot--purple" aria-hidden="true"></div>
+            <p class="timeline-date"><time datetime="2015">2015</time> – <time datetime="2019">2019</time></p>
+            <h3 class="timeline-role">WEB DEVELOPER</h3>
+            <p class="timeline-company">// CARTER SCOTT CONSULTING LTD</p>
+            <p class="timeline-desc">Full-cycle web development across diverse client portfolios. Specialised in Drupal CMS development, performance optimisation, and responsive design delivering measurable business impact.</p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Contact ───────────────────────────────────────────────────────── -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-panel">
+          <div class="contact-grid">
+
+            <!-- Info column -->
+            <div>
+              <div class="section-tag" aria-hidden="true">Get In Touch</div>
+              <h2 class="contact-title" id="contact-title">INITIATE<br><span>TRANSMISSION</span></h2>
+              <p class="contact-subtitle">Available for freelance contracts, consulting engagements, and full-time positions. Let's build something extraordinary.</p>
+              <ul class="contact-info-list">
+                <li class="contact-info-item">
+                  <div class="contact-info-icon" aria-hidden="true">✉</div>
+                  <div>
+                    <div class="contact-info-label">Email Protocol</div>
+                    <div class="contact-info-text"><a href="mailto:jamie@jamie-scott.co.uk">jamie@jamie-scott.co.uk</a></div>
+                  </div>
+                </li>
+                <li class="contact-info-item">
+                  <div class="contact-info-icon" aria-hidden="true">⊕</div>
+                  <div>
+                    <div class="contact-info-label">Location Node</div>
+                    <div class="contact-info-text">Leeds, West Yorkshire, UK</div>
+                  </div>
+                </li>
+                <li class="contact-info-item">
+                  <div class="contact-info-icon" aria-hidden="true">◈</div>
+                  <div>
+                    <div class="contact-info-label">Primary Domain</div>
+                    <div class="contact-info-text"><a href="https://front-end-ninja.co.uk">front-end-ninja.co.uk</a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Form column -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="contact-name">// Designation</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  autocomplete="name"
+                  placeholder="Your name"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">// Communication Channel</label>
+                <input
+                  class="form-input"
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="your@email.com"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-message">// Message Payload</label>
+                <textarea
+                  class="form-input"
+                  id="contact-message"
+                  name="message"
+                  placeholder="Describe your project or opportunity..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-primary form-submit">TRANSMIT MESSAGE</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+  ====================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">2026 <span>JAMIE SCOTT</span> // FRONT END NINJA // LEEDS, UK</p>
+        <nav class="footer-social" aria-label="Social links">
+          <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">gh</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom cursor JS -->
+  <script src="assets/scripts/cursor.js"></script>
+
 </body>
 </html>

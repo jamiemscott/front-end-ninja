@@ -1,0 +1,54 @@
+/* =============================================================================
+   MODULES — hero-mobile.css
+   Hero section responsive adjustments via container query.
+   ============================================================================= */
+
+/* Enable container queries on .hero */
+.hero {
+  container-type: inline-size;
+  container-name: hero;
+}
+
+/* ─── Tablet / narrow desktop ─── */
+
+@container hero (width <= 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-visual {
+    order: -1;
+    max-width: 480px;
+    margin-inline: auto;
+    width: 100%;
+  }
+}
+
+/* ─── Mobile ─── */
+
+@container hero (width <= 600px) {
+  .hero {
+    padding: 100px 0 60px;
+  }
+
+  .hero-stats {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .kanji-watermark {
+    font-size: 12rem;
+    right: -20px;
+  }
+}
