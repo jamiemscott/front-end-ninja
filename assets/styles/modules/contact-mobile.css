@@ -1,19 +1,21 @@
 /* =============================================================================
    MODULES — contact-mobile.css
-   Contact section responsive stacking via container query.
+   Contact section responsive stacking via container query on .contact-container-scope.
    ============================================================================= */
 
-/* Enable container queries on the contact section */
-.contact-section {
+/* ── Container scope ── */
+
+.contact-container-scope {
   container-type: inline-size;
-  container-name: contact;
 }
 
-/* ─── Stack to single column ─── */
+/* ── Stack to single column ── */
 
-@container contact (width <= 768px) {
+@container (max-width: 720px) {
+
   .contact-panel {
-    padding: 40px 24px;
+    padding: 32px 24px;
+    /* Reduce chamfer — 40px is too large at narrow widths */
     clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
   }
 
@@ -21,16 +23,5 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-}
 
-/* ─── Small mobile ─── */
-
-@container contact (width <= 480px) {
-  .contact-panel {
-    padding: 32px 20px;
-  }
-
-  .contact-title {
-    font-size: clamp(1.4rem, 6vw, 1.8rem);
-  }
-}
+} /* end @container contact */

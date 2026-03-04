@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(powershell -Command \"\\(Get-Content ''C:\\\\Users\\\\jamie\\\\Downloads\\\\cyberpunk-portfolio-v3_2.html''\\)[398..439] -join \"\"\\\\`n\"\"\")",
-      "Bash(ls -la \"C:\\\\Users\\\\jamie\\\\OneDrive\\\\Documents\\\\GitHub\\\\front-end-ninja\\\\assets\"\" 2>/dev/null || echo \"Directory listing failed \")"
+      "Bash(ls -la \"C:\\\\Users\\\\jamie\\\\OneDrive\\\\Documents\\\\GitHub\\\\front-end-ninja\\\\assets\"\" 2>/dev/null || echo \"Directory listing failed \")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where npx)",
+      "Bash(node --version)",
+      "Bash(npx --version)",
+      "Bash(where node)",
+      "Bash(Get-Content \"C:\\\\Users\\\\jamie\\\\OneDrive\\\\Documents\\\\GitHub\\\\front-end-ninja\\\\index.html\")",
+      "Bash(Select-Object -Last 20)"
     ]
   }
 }

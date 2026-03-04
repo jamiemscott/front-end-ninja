@@ -1,54 +1,158 @@
 /* =============================================================================
    MODULES — hero-mobile.css
-   Hero section responsive adjustments via container query.
+   Hero section responsive treatment via container query on .hero-container-scope.
+
+   Decision: ≤ 720px — drop photo panel entirely. Full-width typographic hero.
+   .hero-visual is purely decorative — display:none is WCAG-safe.
+
+   Note: @keyframes must be hoisted outside @container blocks.
    ============================================================================= */
 
-/* Enable container queries on .hero */
-.hero {
+/* ── Container scope — establishes container for @container queries ── */
+
+.hero-container-scope {
   container-type: inline-size;
   container-name: hero;
+  width: 100%;
 }
 
-/* ─── Tablet / narrow desktop ─── */
+/* ── Keyframes hoisted outside @container (spec requirement) ── */
 
-@container hero (width <= 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-
-  .hero-visual {
-    order: -1;
-    max-width: 480px;
-    margin-inline: auto;
-    width: 100%;
-  }
+@keyframes heroMobileSweep {
+  0%   { left: -50%; }
+  100% { left: 150%; }
 }
 
-/* ─── Mobile ─── */
+/* Mobile kanji drift — horizontal only (no translateY on mobile) */
+@keyframes kanjiMobileDrift {
+  0%, 100% { transform: translateX(0);      opacity: 0.8; }
+  50%       { transform: translateX(-8px);  opacity: 1; }
+}
 
-@container hero (width <= 600px) {
+/* ── Mobile hero container query ── */
+
+@container hero (max-width: 720px) {
+
+  /* ── Layout ── */
   .hero {
     padding: 100px 0 60px;
+    position: relative;
   }
 
-  .hero-stats {
-    gap: 24px;
-    flex-wrap: wrap;
+  /* Atmospheric vignette — replaces photo's visual weight */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 245, 255, 0.07) 0%, transparent 70%),
+      linear-gradient(180deg, transparent 60%, rgba(2, 4, 8, 0.6) 100%);
+    pointer-events: none;
+    z-index: 0;
   }
 
+  /* Animated horizontal scan beam — pure CSS atmosphere */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 245, 255, 0.05) 40%,
+      rgba(0, 245, 255, 0.10) 50%,
+      rgba(0, 245, 255, 0.05) 60%,
+      transparent
+    );
+    animation: heroMobileSweep 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Single column, full width */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  /* Hide photo panel — decorative only, WCAG-safe */
+  .hero-visual {
+    display: none;
+  }
+
+  /* ── Typography scaling ── */
+  .hero-title-main,
+  .hero-title-accent {
+    font-size: clamp(3.2rem, 13vw, 4.5rem);
+  }
+
+  .hero-title-sub {
+    font-size: clamp(0.65rem, 3vw, 0.9rem);
+    letter-spacing: 0.2em;
+    margin-top: 12px;
+  }
+
+  /* Eyebrow — tighten up */
+  .hero-eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .hero-eyebrow-line {
+    width: 40px;
+  }
+
+  .hero-eyebrow-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* Description — full width now */
+  .hero-description {
+    max-width: 100%;
+    font-size: 1rem;
+    margin: 20px 0 32px;
+  }
+
+  /* ── CTA group — wrap on very narrow ── */
   .hero-cta-group {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 12px;
   }
 
-  .hero-description {
-    font-size: 1rem;
+  .btn-primary,
+  .btn-secondary {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    padding: 14px 20px;
   }
 
-  .kanji-watermark {
-    font-size: 12rem;
-    right: -20px;
+  /* ── Stats — 2-col micro grid ── */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+    margin-top: 40px;
+    padding-top: 28px;
   }
-}
+
+  /* Kanji watermark — top-aligned with title block */
+  .kanji-watermark {
+    position: absolute;
+    right: 16px;
+    top: 160px;
+    transform: none;
+    font-size: clamp(7rem, 22vw, 11rem);
+    color: rgba(0, 245, 255, 0.055);
+    writing-mode: vertical-rl;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    z-index: 0;
+    animation: kanjiMobileDrift 20s ease-in-out infinite;
+  }
+
+} /* end @container hero */

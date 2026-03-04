@@ -1,179 +1,359 @@
 /* =============================================================================
    LAYOUT — nav-mobile.css
-   Mobile navigation: hamburger button + Popover API full-screen drawer.
-   Requires HTML additions — see comments below.
+   Mobile navigation: container-query hamburger + Popover API side-panel drawer.
 
-   HTML needed inside <nav class="site-nav">:
-     <button class="nav-hamburger" popovertarget="nav-drawer"
-             aria-label="Open navigation" aria-haspopup="dialog">
-       <span class="hamburger-line"></span>
-       <span class="hamburger-line"></span>
-       <span class="hamburger-line"></span>
-     </button>
+   Technique: @container query on .nav-container-scope (inline-size ≤ 720px)
+   Drawer:    Popover API (zero JS) — right-anchored glassmorphism panel.
+              Chrome 114+ for Popover, Chrome 117+ for @starting-style.
 
-   And after </header>:
-     <div id="nav-drawer" class="nav-drawer" popover>
-       <button class="nav-drawer-close" popovertarget="nav-drawer"
-               popovertargetaction="hide" aria-label="Close navigation">✕</button>
-       <ul class="nav-drawer-links" role="list">
-         <li><a href="#skills">Skills</a></li>
-         <li><a href="#projects">Projects</a></li>
-         <li><a href="#experience">Experience</a></li>
-         <li><a href="#contact">Contact</a></li>
-       </ul>
+   HTML structure required in index.html:
+     <div class="nav-container-scope">
+       <header class="site-header">
+         <nav class="site-nav">
+           ...existing nav...
+           <button class="nav-hamburger" popovertarget="nav-drawer">
+             <span class="ham-bar"></span> ×3
+             <span class="ham-label">MENU</span>
+           </button>
+         </nav>
+       </header>
+       <div id="nav-drawer" class="nav-drawer" popover>
+         <button class="nav-drawer-close" ...>
+           <span class="close-icon">✕</span>
+           <span class="close-label">CLOSE</span>
+         </button>
+         <div class="nav-drawer-inner">
+           <div class="nav-drawer-logo">...</div>
+           <ul class="nav-drawer-links">...</ul>
+           <div class="nav-drawer-status">...</div>
+         </div>
+         <div class="nav-drawer-scan"></div>
+       </div>
      </div>
    ============================================================================= */
 
-/* ─── Hamburger button — mobile only ─── */
+/* ── Container scope — enables @container queries ── */
+
+.nav-container-scope {
+  container-type: inline-size;
+  container-name: nav;
+}
+
+/* ── Touch devices — restore default cursor on interactive elements ── */
+
+@media (pointer: coarse) {
+  body,
+  .btn-primary,
+  .btn-secondary,
+  .skill-card,
+  .project-card { cursor: auto; }
+  .cursor-ring { display: none; }
+}
+
+/* ─── Hamburger button — hidden on desktop ─── */
 
 .nav-hamburger {
   display: none;
 }
 
-@media (width <= 768px) {
-  .nav-links,
-  .nav-status {
-    display: none;
+@container nav (max-width: 720px) {
+
+  /* ── Top bar: logo left, status + hamburger right ── */
+  .site-nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
   }
 
+  /* Allow logo text to truncate rather than overflow the 1fr track */
+  .nav-logo {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* Hide desktop nav links — they live in the drawer on mobile */
+  .nav-links { display: none; }
+
+  /* Status shrinks a touch */
+  .nav-status {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Hamburger button ── */
   .nav-hamburger {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    border: 1px solid rgba(0, 245, 255, 0.2);
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-    transition: border-color 0.2s ease;
+    width: 44px;
+    height: 52px;
+    padding: 8px 6px 6px;
+    background: transparent;
+    border: 1px solid rgba(0, 245, 255, 0.25);
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
 
-    &:hover {
-      border-color: rgba(0, 245, 255, 0.6);
+    &:hover,
+    &:focus-visible {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 14px rgba(0, 245, 255, 0.3);
+      outline: none;
     }
   }
 
-  .hamburger-line {
+  .ham-bar {
     display: block;
-    width: 100%;
+    width: 20px;
     height: 1px;
     background: var(--neon-cyan);
     box-shadow: 0 0 6px var(--neon-cyan);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform-origin: center;
+    transition: opacity 0.2s ease;
   }
-}
 
-/* ─── Popover drawer ─── */
+  .ham-label {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.15em;
+    color: var(--neon-cyan);
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+} /* end @container nav */
+
+/* ── Drawer — outside container query so popover positioning is global ── */
 
 .nav-drawer {
+  /* Reset browser popover defaults */
   position: fixed;
-  inset: 0;
-  width: 100%;
+  inset: 0 0 0 auto; /* right-anchored, full height */
+  width: min(80vw, 320px);
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
   margin: 0;
-  padding: 80px 40px 40px;
-  background: rgba(2, 4, 8, 0.97);
+  padding: 0;
   border: none;
-  overflow: hidden;
-  z-index: 999;
 
-  /* Background grid */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
+  /* Glassmorphism panel */
+  background: rgba(6, 13, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(0, 245, 255, 0.15);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6), -4px 0 20px rgba(0, 245, 255, 0.06);
 
-  /* Cyan accent line at top */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-    box-shadow: 0 0 20px var(--neon-cyan);
-  }
-
-  /* Closed state */
-  opacity: 0;
-  translate: 0 -16px;
+  /* Slide transition — translate off-screen right when closed */
+  translate: 100% 0;
   transition:
-    opacity 0.3s ease,
-    translate 0.3s ease,
-    display 0.3s ease allow-discrete,
-    overlay 0.3s ease allow-discrete;
+    translate 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    display 0.35s allow-discrete,
+    overlay 0.35s allow-discrete;
 
-  /* Open state */
+  /* Open state — Popover API adds :popover-open */
   &:popover-open {
-    opacity: 1;
+    display: block;
     translate: 0 0;
   }
 
-  /* Entry animation */
+  /* @starting-style — where the animation starts from when opening */
   @starting-style {
     &:popover-open {
-      opacity: 0;
-      translate: 0 -16px;
+      translate: 100% 0;
     }
   }
+
+  /* Backdrop — dark overlay behind drawer */
+  &::backdrop {
+    background: rgba(2, 4, 8, 0.7);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition:
+      opacity 0.35s ease,
+      display 0.35s allow-discrete,
+      overlay 0.35s allow-discrete;
+  }
+
+  &:popover-open::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    &:popover-open::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+/* ── Drawer internals ── */
+
+.nav-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 80px 40px 48px;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-drawer-close {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 52px;
+  background: transparent;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  color: var(--text-muted);
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  transition: all 0.3s ease;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 245, 255, 0.2);
-  color: var(--neon-cyan);
-  font-size: 1rem;
-  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  transition: border-color 0.2s ease;
-  z-index: 1;
+  gap: 3px;
+  z-index: 2;
 
-  &:hover {
-    border-color: rgba(0, 245, 255, 0.6);
+  &:hover,
+  &:focus-visible {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 14px rgba(255, 0, 128, 0.3);
+    outline: none;
   }
 }
 
+.close-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.close-label {
+  font-size: 0.45rem;
+  letter-spacing: 0.15em;
+  line-height: 1;
+}
+
+.nav-drawer-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.08);
+}
+
 .nav-drawer-links {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  margin-top: 20px;
+  gap: 4px;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+
+  & li {
+    overflow: hidden;
+  }
 
   & a {
     display: block;
     font-family: 'Orbitron', monospace;
-    font-size: clamp(1.6rem, 7vw, 2.8rem);
-    font-weight: 900;
-    color: var(--text-primary);
-    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 245, 255, 0.08);
-    transition: color 0.2s ease, text-shadow 0.2s ease, padding-left 0.2s ease;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.06);
+    position: relative;
+    transition: color 0.3s ease, padding-left 0.3s ease;
 
-    &:hover {
+    /* Cyan left-edge accent on hover */
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      width: 2px;
+      height: 60%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
       color: var(--neon-cyan);
-      text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
-      padding-left: 12px;
+      padding-left: 16px;
+      outline: none;
+
+      &::before {
+        transform: translateY(-50%) scaleY(1);
+      }
     }
   }
+
+  /* Counter glyphs */
+  & li:nth-child(1) a::after { content: '01'; }
+  & li:nth-child(2) a::after { content: '02'; }
+  & li:nth-child(3) a::after { content: '03'; }
+  & li:nth-child(4) a::after { content: '04'; }
+
+  & a::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(0, 245, 255, 0.25);
+    letter-spacing: 0.15em;
+  }
+}
+
+.nav-drawer-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--status-green);
+  letter-spacing: 0.15em;
+  padding-top: 32px;
+  border-top: 1px solid rgba(0, 245, 255, 0.06);
+}
+
+/* Decorative vertical scan line on drawer edge */
+.nav-drawer-scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 245, 255, 0.4) 30%,
+    rgba(0, 245, 255, 0.4) 70%,
+    transparent
+  );
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+  animation: drawerScanPulse 3s ease-in-out infinite;
+}
+
+@keyframes drawerScanPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
 }

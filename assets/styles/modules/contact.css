@@ -123,7 +123,7 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.95rem;
   outline: none;
-  transition: all var(--transition-base);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 
   &:focus {
@@ -135,6 +135,24 @@
   &::placeholder {
     color: var(--text-muted);
     opacity: 0.5;
+  }
+
+  /* ── Error state ──
+     :user-invalid  fires after the user has interacted with a field (real-time)
+     .was-validated :invalid  fires on all invalid fields after a submit attempt
+  ── */
+  &:user-invalid,
+  .was-validated &:invalid {
+    border-color: rgba(255, 0, 128, 0.6);
+    background: rgba(255, 0, 128, 0.04);
+    box-shadow: 0 0 16px rgba(255, 0, 128, 0.15);
+  }
+
+  /* Keep focus ring readable when field is also invalid */
+  &:user-invalid:focus,
+  .was-validated &:invalid:focus {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 24px rgba(255, 0, 128, 0.3);
   }
 }
 
@@ -179,14 +197,32 @@ textarea.form-input {
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
 }
 
-/* Success panel */
+/* Submitted state — dim fields to signal they're locked */
+.is-submitted .form-input {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Success panel — sits below the form after submission */
 .form-success {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 40px 0;
+  padding: 28px 0 0;
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 255, 136, 0.15);
   outline: none;
+}
+
+/* Override: author display: flex beats the UA [hidden] rule — be explicit */
+.form-success[hidden] {
+  display: none;
+}
+
+/* Icon + text side-by-side */
+.form-success-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .form-success-icon {
@@ -195,13 +231,37 @@ textarea.form-input {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   border: 1px solid rgba(0, 255, 136, 0.4);
   color: var(--status-green);
   font-size: 1.4rem;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  animation: successIconPulse 2s ease-in-out infinite;
 }
 
+@keyframes successIconPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+  50%       { box-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
+}
+
+.form-success-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Title + dismiss button on the same row */
+.form-success-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Glitch title — green palette matching hero glitch technique */
 .form-success-title {
   font-family: 'Orbitron', monospace;
   font-size: 1.1rem;
@@ -209,6 +269,50 @@ textarea.form-input {
   color: var(--status-green);
   letter-spacing: 0.1em;
   text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  position: relative;
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--status-green);
+    letter-spacing: 0.1em;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 900;
+  }
+
+  &::before {
+    clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
+    transform: translate(-2px, -1px);
+    opacity: 0;
+    animation: successGlitch1 5s infinite;
+    text-shadow: 1px 0 var(--neon-cyan);
+  }
+
+  &::after {
+    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    transform: translate(2px, 1px);
+    opacity: 0;
+    animation: successGlitch2 5s infinite;
+    text-shadow: -1px 0 var(--neon-pink);
+  }
+}
+
+@keyframes successGlitch1 {
+  0%, 85%, 100% { transform: translate(-2px, -1px); opacity: 0; }
+  87%            { transform: translate(-5px,  0);   opacity: 0.7; }
+  89%            { transform: translate( 0,   -3px); opacity: 0.7; }
+  91%            { transform: translate(-2px, -1px); opacity: 0; }
+}
+
+@keyframes successGlitch2 {
+  0%, 86%, 100% { transform: translate( 2px, 1px); opacity: 0; }
+  88%            { transform: translate( 5px, 0);   opacity: 0.7; }
+  90%            { transform: translate( 0,   3px); opacity: 0.7; }
+  92%            { transform: translate( 2px, 1px); opacity: 0; }
 }
 
 .form-success-body {
@@ -217,4 +321,31 @@ textarea.form-input {
   color: var(--text-muted);
   letter-spacing: 0.05em;
   line-height: 1.6;
+}
+
+/* Dismiss button */
+.form-success-dismiss {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  color: var(--status-green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(0, 255, 136, 0.06);
+    border-color: rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.2);
+    outline: none;
+  }
 }

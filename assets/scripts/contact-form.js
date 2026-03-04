@@ -6,18 +6,47 @@
 
   const submitBtn = form.querySelector('.form-submit');
   const successPanel = document.getElementById('form-success');
+  const dismissBtn = successPanel.querySelector('.form-success-dismiss');
   const ORIGINAL_LABEL = submitBtn.textContent;
+  const fields = form.querySelectorAll('.form-input');
+
+  function disableForm() {
+    fields.forEach(function (f) { f.disabled = true; });
+    submitBtn.disabled = true;
+    submitBtn.textContent = ORIGINAL_LABEL;
+    submitBtn.removeAttribute('aria-busy');
+    form.classList.add('is-submitted');
+  }
+
+  function enableForm() {
+    fields.forEach(function (f) { f.disabled = false; });
+    submitBtn.disabled = false;
+    form.classList.remove('is-submitted');
+  }
+
+  // Dismiss — re-enable fields, hide success panel, reset form
+  dismissBtn.addEventListener('click', function () {
+    successPanel.hidden = true;
+    enableForm();
+    form.reset();
+    form.classList.remove('was-validated');
+    fields[0].focus();
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Run native constraint validation — show built-in messages for empty fields
+    // Run native constraint validation
+    // was-validated triggers CSS :invalid highlighting on all fields
+    form.classList.add('was-validated');
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    // Remove any previous error
+    // Clear validated state and any previous network error on a valid submit
+    form.classList.remove('was-validated');
     const prevError = form.querySelector('.form-error');
     if (prevError) prevError.remove();
 
@@ -36,13 +65,13 @@
           throw new Error('Network response was not ok (' + response.status + ')');
         }
 
-        // Hide the form, reveal success panel
-        form.hidden = true;
+        // Disable fields, show success panel below the form
+        disableForm();
         successPanel.hidden = false;
         successPanel.focus();
       })
       .catch(function () {
-        // Restore button
+        // Restore button on network failure
         submitBtn.disabled = false;
         submitBtn.textContent = ORIGINAL_LABEL;
         submitBtn.removeAttribute('aria-busy');

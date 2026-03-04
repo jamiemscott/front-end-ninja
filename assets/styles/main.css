@@ -32,6 +32,7 @@
 @import "modules/hero-mobile.css" layer(modules);
 @import "modules/skills-mobile.css" layer(modules);
 @import "modules/contact-mobile.css" layer(modules);
+@import "modules/back-to-top.css" layer(modules);
 
 /* --- State --- */
 @import "state/states.css" layer(state);

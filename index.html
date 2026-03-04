@@ -57,41 +57,60 @@
   <a href="#main-content" class="skip-link is-visually-hidden">Skip to main content</a>
 
   <!-- =====================================================================
-       HEADER
+       HEADER + MOBILE NAV DRAWER (nav-container-scope enables container queries)
   ====================================================================== -->
-  <header class="site-header" role="banner">
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a href="/" class="nav-logo" aria-label="Front-End Ninja — home">FRONT.END.NINJA</a>
-      <ul class="nav-links" role="list">
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-status" aria-label="Status: available for hire">
-        <div class="status-dot" aria-hidden="true"></div>
-        <span>AVAILABLE FOR HIRE</span>
-      </div>
-      <button class="nav-hamburger" popovertarget="nav-drawer"
-              aria-label="Open navigation" aria-haspopup="dialog">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-    </nav>
-  </header>
+  <div class="nav-container-scope">
 
-  <!-- Mobile nav drawer (Popover API) -->
-  <div id="nav-drawer" class="nav-drawer" popover>
-    <button class="nav-drawer-close" popovertarget="nav-drawer"
-            popovertargetaction="hide" aria-label="Close navigation">✕</button>
-    <ul class="nav-drawer-links" role="list">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
+    <header class="site-header" role="banner">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/" class="nav-logo" aria-label="Front-End Ninja — home">FRONT.END.NINJA</a>
+        <ul class="nav-links" role="list">
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-status" aria-label="Status: available for hire">
+          <div class="status-dot" aria-hidden="true"></div>
+          <span>AVAILABLE FOR HIRE</span>
+        </div>
+        <button class="nav-hamburger" popovertarget="nav-drawer"
+                aria-label="Open navigation menu" aria-haspopup="dialog">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-label">MENU</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile nav drawer (Popover API — zero JS) -->
+    <div id="nav-drawer" class="nav-drawer" popover>
+      <button class="nav-drawer-close" popovertarget="nav-drawer"
+              popovertargetaction="hide" aria-label="Close navigation">
+        <span class="close-icon">✕</span>
+        <span class="close-label">CLOSE</span>
+      </button>
+
+      <div class="nav-drawer-inner">
+        <div class="nav-drawer-logo" aria-hidden="true">FRONT.END.NINJA</div>
+        <ul class="nav-drawer-links" role="list">
+          <li><a href="#skills"     popovertarget="nav-drawer" popovertargetaction="hide">Skills</a></li>
+          <li><a href="#projects"   popovertarget="nav-drawer" popovertargetaction="hide">Projects</a></li>
+          <li><a href="#experience" popovertarget="nav-drawer" popovertargetaction="hide">Experience</a></li>
+          <li><a href="#contact"    popovertarget="nav-drawer" popovertargetaction="hide">Contact</a></li>
+        </ul>
+        <div class="nav-drawer-status" aria-hidden="true">
+          <div class="status-dot"></div>
+          AVAILABLE FOR HIRE
+        </div>
+      </div>
+
+      <!-- Decorative scan line -->
+      <div class="nav-drawer-scan" aria-hidden="true"></div>
+    </div>
+
+  </div><!-- /nav-container-scope -->
 
   <!-- =====================================================================
        MAIN
@@ -99,6 +118,8 @@
   <main id="main-content">
 
     <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+    <!-- hero-container-scope enables @container hero queries in hero-mobile.css -->
+    <div class="hero-container-scope">
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="kanji-watermark" aria-hidden="true">忍者</div>
       <div class="container">
@@ -180,8 +201,11 @@
         </div>
       </div>
     </section>
+    </div><!-- /hero-container-scope -->
 
     <!-- ── Skills ────────────────────────────────────────────────────────── -->
+    <!-- skills-container-scope enables @container carousel queries -->
+    <div class="skills-container-scope">
     <section id="skills" class="section" aria-labelledby="skills-title">
       <div class="container">
         <div class="section-header">
@@ -249,10 +273,16 @@
           </div>
 
         </div>
+
+        <!-- Baseline scroll progress bar — animated via scroll-timeline; replaced by dot markers in Chrome 135+ -->
+        <div class="scroll-track skills-scroll-track" aria-hidden="true"><div class="scroll-thumb"></div></div>
       </div>
     </section>
+    </div><!-- /skills-container-scope -->
 
     <!-- ── Projects ──────────────────────────────────────────────────────── -->
+    <!-- projects-container-scope enables @container carousel queries -->
+    <div class="projects-container-scope">
     <section id="projects" class="section" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-header">
@@ -266,15 +296,9 @@
         <div class="projects-grid">
 
           <article class="project-card">
-            <div class="project-card-visual pv-photo">
-              <img
-                src="assets/images/projects/we-are-legion.jpg"
-                alt="We Are Legion interactive map showing custom markers on a dark-styled Google Map"
-                loading="lazy"
-                width="800"
-                height="220"
-              >
+            <div class="project-card-visual pv3">
               <div class="project-visual-overlay" aria-hidden="true"></div>
+              <div class="project-visual-glyph" aria-hidden="true">軍</div>
             </div>
             <div class="project-card-content">
               <div class="project-tags" aria-label="Technologies used">
@@ -339,8 +363,12 @@
           </article>
 
         </div>
+
+        <!-- Baseline scroll progress bar — animated via scroll-timeline; replaced by dot markers in Chrome 135+ -->
+        <div class="scroll-track projects-scroll-track" aria-hidden="true"><div class="scroll-thumb"></div></div>
       </div>
     </section>
+    </div><!-- /projects-container-scope -->
 
     <!-- ── Experience ────────────────────────────────────────────────────── -->
     <section id="experience" class="section" aria-labelledby="experience-title">
@@ -384,6 +412,8 @@
     </section>
 
     <!-- ── Contact ───────────────────────────────────────────────────────── -->
+    <!-- contact-container-scope enables @container stacking query -->
+    <div class="contact-container-scope">
     <section id="contact" class="contact-section" aria-labelledby="contact-title">
       <div class="container">
         <div class="contact-panel">
@@ -467,9 +497,18 @@
 
               <!-- Success message — shown after AJAX submission -->
               <div class="form-success" id="form-success" hidden aria-live="polite" tabindex="-1">
-                <div class="form-success-icon" aria-hidden="true">✓</div>
-                <p class="form-success-title">TRANSMISSION COMPLETE</p>
-                <p class="form-success-body">Message received. I'll be in touch shortly.</p>
+                <div class="form-success-main">
+                  <div class="form-success-icon" aria-hidden="true">✓</div>
+                  <div class="form-success-text">
+                    <div class="form-success-header">
+                      <p class="form-success-title" data-text="TRANSMISSION COMPLETE">TRANSMISSION COMPLETE</p>
+                      <button class="form-success-dismiss" type="button" aria-label="Dismiss confirmation">
+                        <span aria-hidden="true">✕</span> DISMISS
+                      </button>
+                    </div>
+                    <p class="form-success-body">Message received. I'll be in touch shortly.</p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -477,6 +516,7 @@
         </div>
       </div>
     </section>
+    </div><!-- /contact-container-scope -->
 
   </main>
 
@@ -494,6 +534,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Back to top -->
+  <a href="#hero" class="back-to-top" aria-label="Scroll back to top">
+    <span class="btt-icon" aria-hidden="true">↑</span>
+    <span class="btt-label">TOP</span>
+  </a>
 
   <!-- Custom cursor JS -->
   <script src="assets/scripts/cursor.js"></script>

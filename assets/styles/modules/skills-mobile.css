@@ -1,54 +1,284 @@
 /* =============================================================================
    MODULES — skills-mobile.css
-   Mobile skills layout: single column, with scroll-snap carousel enhancement.
+   Horizontal scroll carousel for Skills + Projects on mobile.
+
+   Architecture:
+     .skills-container-scope / .projects-container-scope — container-type wrappers
+     @container (max-width: 720px) — scopes all carousel styles
+
+   Progressive enhancement:
+     BASELINE  (all browsers)  scroll-snap + named scroll-timeline progress bar
+     ENHANCED  (@supports scroll-marker-group) ::scroll-button + ::scroll-marker dots
+               Requires Chrome 135+; falls back gracefully to progress bar.
+
+   HTML additions required (inside each section's .container):
+     <div class="scroll-track skills-scroll-track" aria-hidden="true">
+       <div class="scroll-thumb"></div>
+     </div>
    ============================================================================= */
 
-/* Enable container queries on the skills section */
-.skills-section {
+/* ── Container scopes ── */
+
+.skills-container-scope,
+.projects-container-scope {
   container-type: inline-size;
-  container-name: skills;
 }
 
-/* ─── Collapse to single column ─── */
+/* Progress bar — hidden on desktop (shown inside container query) */
+.scroll-track { display: none; }
 
-@container skills (width <= 768px) {
+/* ── Keyframe hoisted outside @container (spec requirement) ── */
+
+@keyframes scrollThumbGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CONTAINER QUERY — fires at ≤ 720px
+   ════════════════════════════════════════════════════════════ */
+
+@container (max-width: 720px) {
+
+  /* ── Remove container padding so cards bleed edge-to-edge ── */
+  .skills-container-scope .container,
+  .projects-container-scope .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .skills-container-scope .section-header,
+  .projects-container-scope .section-header {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Move gradient border off the scrolling grid onto the stationary wrapper.
+     mix-blend-mode: screen lets it overlay without blocking cards. */
+  .skills-grid::before {
+    display: none;
+  }
+
+  .skills-container-scope {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .skills-container-scope::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), transparent, rgba(255, 0, 128, 0.15));
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 1;
+  }
+
+  /* ══════════════════════════════════════════
+     BASELINE — scroll-snap horizontal scroll
+  ══════════════════════════════════════════ */
+
   .skills-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    background: transparent;
+    border: none;
+    overflow-x: scroll;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 24px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 4px 24px 20px;
+    scroll-timeline-name: --skills-scroll;
+    scroll-timeline-axis: inline;
+
+    &::-webkit-scrollbar { display: none; }
   }
-}
 
-/* ─── @supports carousel enhancement ─── */
-/* When scroll-snap is available, convert to a horizontal swipeable carousel */
+  .skill-card {
+    flex: 0 0 72vw;
+    max-width: 300px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    border: 1px solid rgba(0, 245, 255, 0.08);
+    margin-right: 12px;
 
-@supports (scroll-snap-type: x mandatory) {
-  @container skills (width <= 768px) {
-    .skills-grid {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      gap: 1px;
+    &:last-of-type { margin-right: 0; }
+  }
+
+  .projects-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    overflow-x: scroll;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 24px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 4px 24px 20px;
+    scroll-timeline-name: --projects-scroll;
+    scroll-timeline-axis: inline;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .project-card {
+    flex: 0 0 80vw;
+    max-width: 340px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    margin-right: 16px;
+
+    &:last-of-type { margin-right: 0; }
+  }
+
+  /* ── Baseline progress bar ──
+     Named scroll-timeline on the grid drives the thumb scaleX animation.
+     Hidden when ::scroll-marker is supported (replaced by dot markers).
+  ── */
+  .scroll-track {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 245, 255, 0.08);
+    margin-top: 4px;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .scroll-thumb {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    box-shadow: 0 0 8px var(--neon-cyan);
+    transform-origin: left;
+    animation: scrollThumbGrow linear both;
+  }
+
+  .skills-scroll-track .scroll-thumb {
+    animation-timeline: --skills-scroll;
+  }
+
+  .projects-scroll-track .scroll-thumb {
+    animation-timeline: --projects-scroll;
+  }
+
+  /* ══════════════════════════════════════════
+     ENHANCED — ::scroll-button + ::scroll-marker
+     @supports gates this to Chrome 135+ where
+     both pseudo-elements are available.
+     Falls back gracefully to the baseline above.
+  ══════════════════════════════════════════ */
+
+  @supports (scroll-marker-group: after) {
+
+    /* Hide the progress bar — dot markers replace it */
+    .scroll-track { display: none; }
+
+    /* ── Dot marker group — rendered after the cards ── */
+    .skills-grid,
+    .projects-grid {
+      scroll-marker-group: after;
+    }
+
+    /* ── Dot markers on each card ── */
+    .skill-card::scroll-marker,
+    .project-card::scroll-marker {
+      /* Square dot — geometric, fits cyberpunk aesthetic */
+      content: '';
+      width: 6px;
+      height: 6px;
       background: transparent;
-      border: none;
-      padding-bottom: 16px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      /* Remove the gradient border pseudo-element */
-      &::before {
-        display: none;
-      }
+      border: 1px solid rgba(0, 245, 255, 0.35);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .skill-card {
-      flex: 0 0 min(300px, 80vw);
-      scroll-snap-align: start;
-      border: 1px solid rgba(0, 245, 255, 0.08);
+    /* Active dot — current card in view */
+    .skill-card::scroll-marker:target-current,
+    .project-card::scroll-marker:target-current {
+      background: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px rgba(0, 245, 255, 0.4);
     }
-  }
-}
+
+    /* ── Marker group container — the row of dots ── */
+    .skills-grid::scroll-marker-group,
+    .projects-grid::scroll-marker-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 0 4px;
+      border-top: 1px solid rgba(0, 245, 255, 0.06);
+      margin-top: 4px;
+    }
+
+    /* ── Scroll buttons — prev / next ──
+       Positioned at either end of the scroll container.
+       Browser auto-disables at scroll boundaries.
+    ── */
+    .skills-grid::scroll-button(inline-start),
+    .skills-grid::scroll-button(inline-end),
+    .projects-grid::scroll-button(inline-start),
+    .projects-grid::scroll-button(inline-end) {
+      width: 36px;
+      height: 36px;
+      background: rgba(2, 4, 8, 0.9);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      color: var(--neon-cyan);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: absolute;
+      top: 50%;
+      translate: 0 -50%;
+      z-index: 10;
+    }
+
+    .skills-grid::scroll-button(inline-start),
+    .projects-grid::scroll-button(inline-start) {
+      content: '←' / 'Previous';
+      left: 4px;
+    }
+
+    .skills-grid::scroll-button(inline-end),
+    .projects-grid::scroll-button(inline-end) {
+      content: '→' / 'Next';
+      right: 4px;
+    }
+
+    .skills-grid::scroll-button(inline-start):hover,
+    .skills-grid::scroll-button(inline-end):hover,
+    .projects-grid::scroll-button(inline-start):hover,
+    .projects-grid::scroll-button(inline-end):hover {
+      background: rgba(0, 245, 255, 0.08);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.3);
+    }
+
+    /* Disabled state — browser sets at scroll boundaries */
+    .skills-grid::scroll-button(inline-start):disabled,
+    .skills-grid::scroll-button(inline-end):disabled,
+    .projects-grid::scroll-button(inline-start):disabled,
+    .projects-grid::scroll-button(inline-end):disabled {
+      border-color: rgba(0, 245, 255, 0.1);
+      color: rgba(0, 245, 255, 0.2);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Grids need position:relative for absolute scroll buttons */
+    .skills-grid,
+    .projects-grid {
+      position: relative;
+    }
+
+  } /* end @supports */
+
+} /* end @container */
