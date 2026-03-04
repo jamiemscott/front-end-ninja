@@ -381,33 +381,65 @@
           <div class="section-counter" aria-hidden="true">03</div>
         </div>
 
-        <ol class="timeline" role="list">
+        <div class="experience-layout">
 
-          <li class="timeline-item">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <p class="timeline-date"><time datetime="2023">2023</time> – PRESENT</p>
-            <h3 class="timeline-role">SENIOR FRONT END DEVELOPER</h3>
-            <p class="timeline-company">// UNIPRO LTD</p>
-            <p class="timeline-desc">Leading frontend architecture on OutSystems 11 enterprise applications. Pioneering accessibility standards, implementing advanced CSS techniques, and mentoring developers in modern web practices.</p>
-          </li>
+          <ol class="timeline" role="list">
 
-          <li class="timeline-item">
-            <div class="timeline-dot timeline-dot--pink" aria-hidden="true"></div>
-            <p class="timeline-date"><time datetime="2019">2019</time> – <time datetime="2023">2023</time></p>
-            <h3 class="timeline-role">FRONT END DEVELOPER</h3>
-            <p class="timeline-company">// CHARLES STANLEY DIRECT</p>
-            <p class="timeline-desc">Delivered WCAG-compliant financial web applications serving thousands of investors. Spearheaded accessibility audit programmes and established front-end coding standards across the organisation.</p>
-          </li>
+            <li class="timeline-item" data-detail-id="unipro">
+              <details class="timeline-details">
+                <summary class="timeline-summary">
+                  <div class="timeline-dot" aria-hidden="true"></div>
+                  <p class="timeline-date"><time datetime="2023">2023</time> – PRESENT</p>
+                  <h3 class="timeline-role">SENIOR FRONT END DEVELOPER</h3>
+                  <p class="timeline-company">// UNIPRO LTD</p>
+                  <p class="timeline-desc">Leading frontend architecture on OutSystems 11 enterprise applications. Pioneering accessibility standards, implementing advanced CSS techniques, and mentoring developers in modern web practices.</p>
+                </summary>
+                <div class="timeline-extra" aria-hidden="true">
+                  <div class="timeline-extra-inner"></div>
+                </div>
+              </details>
+            </li>
 
-          <li class="timeline-item">
-            <div class="timeline-dot timeline-dot--purple" aria-hidden="true"></div>
-            <p class="timeline-date"><time datetime="2015">2015</time> – <time datetime="2019">2019</time></p>
-            <h3 class="timeline-role">WEB DEVELOPER</h3>
-            <p class="timeline-company">// CARTER SCOTT CONSULTING LTD</p>
-            <p class="timeline-desc">Full-cycle web development across diverse client portfolios. Specialised in Drupal CMS development, performance optimisation, and responsive design delivering measurable business impact.</p>
-          </li>
+            <li class="timeline-item" data-detail-id="charlesstanley">
+              <details class="timeline-details">
+                <summary class="timeline-summary">
+                  <div class="timeline-dot timeline-dot--pink" aria-hidden="true"></div>
+                  <p class="timeline-date"><time datetime="2019">2019</time> – <time datetime="2023">2023</time></p>
+                  <h3 class="timeline-role">FRONT END DEVELOPER</h3>
+                  <p class="timeline-company">// CHARLES STANLEY DIRECT</p>
+                  <p class="timeline-desc">Delivered WCAG-compliant financial web applications serving thousands of investors. Spearheaded accessibility audit programmes and established front-end coding standards across the organisation.</p>
+                </summary>
+                <div class="timeline-extra" aria-hidden="true">
+                  <div class="timeline-extra-inner"></div>
+                </div>
+              </details>
+            </li>
 
-        </ol>
+            <li class="timeline-item" data-detail-id="carterscott">
+              <details class="timeline-details">
+                <summary class="timeline-summary">
+                  <div class="timeline-dot timeline-dot--purple" aria-hidden="true"></div>
+                  <p class="timeline-date"><time datetime="2015">2015</time> – <time datetime="2019">2019</time></p>
+                  <h3 class="timeline-role">WEB DEVELOPER</h3>
+                  <p class="timeline-company">// CARTER SCOTT CONSULTING LTD</p>
+                  <p class="timeline-desc">Full-cycle web development across diverse client portfolios. Specialised in Drupal CMS development, performance optimisation, and responsive design delivering measurable business impact.</p>
+                </summary>
+                <div class="timeline-extra" aria-hidden="true">
+                  <div class="timeline-extra-inner"></div>
+                </div>
+              </details>
+            </li>
+
+          </ol>
+
+          <div class="experience-detail"
+               id="experience-detail"
+               aria-live="polite"
+               aria-label="Role details"
+               aria-atomic="true">
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -544,6 +576,7 @@
   <!-- Custom cursor JS -->
   <script src="assets/scripts/cursor.js"></script>
   <script src="assets/scripts/contact-form.js"></script>
+  <script src="assets/scripts/experience-detail.js" defer></script>
 
 </body>
 </html>

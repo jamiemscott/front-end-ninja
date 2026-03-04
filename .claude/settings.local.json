@@ -9,7 +9,10 @@
       "Bash(npx --version)",
       "Bash(where node)",
       "Bash(Get-Content \"C:\\\\Users\\\\jamie\\\\OneDrive\\\\Documents\\\\GitHub\\\\front-end-ninja\\\\index.html\")",
-      "Bash(Select-Object -Last 20)"
+      "Bash(Select-Object -Last 20)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebFetch(domain:my.visualcv.com)",
+      "WebFetch(domain:rocketreach.co)"
     ]
   }
 }

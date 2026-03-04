@@ -23,16 +23,43 @@
 .timeline-item {
   position: relative;
   margin-bottom: 48px;
-  padding: 28px 32px;
   background: var(--dark-surface);
   border: 1px solid rgba(0, 245, 255, 0.06);
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-  transition: all var(--transition-base);
+  transition: border-color var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
 
   &:hover {
     border-color: rgba(0, 245, 255, 0.2);
     background: var(--dark-panel);
   }
+
+  &.is-selected {
+    border-color: rgba(0, 245, 255, 0.35);
+    background: var(--dark-panel);
+    box-shadow: inset 3px 0 0 var(--neon-cyan);
+  }
+}
+
+/* <details>/<summary> used for disclosure — style as plain block */
+.timeline-details {
+  width: 100%;
+  /* Open Props normalize applies a grey background to <details> — reset it */
+  background: transparent;
+  color: inherit;
+}
+
+.timeline-summary {
+  display: block;
+  padding: 28px 32px;
+  cursor: pointer;
+  list-style: none;
+  /* Open Props normalize applies a grey background to <summary> — reset it */
+  background: transparent;
+  color: inherit;
+
+  /* Remove native disclosure triangle across all browsers */
+  &::-webkit-details-marker { display: none; }
+  &::marker { display: none; }
 }
 
 /* Dot on the spine */

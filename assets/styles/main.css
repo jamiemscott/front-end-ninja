@@ -28,6 +28,7 @@
 @import "modules/button.css" layer(modules);
 @import "modules/badge.css" layer(modules);
 @import "modules/timeline.css" layer(modules);
+@import "modules/experience-detail.css" layer(modules);
 @import "modules/contact.css" layer(modules);
 @import "modules/hero-mobile.css" layer(modules);
 @import "modules/skills-mobile.css" layer(modules);
