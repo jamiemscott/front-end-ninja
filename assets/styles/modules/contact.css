@@ -148,3 +148,73 @@ textarea.form-input {
   justify-content: center;
   margin-top: 4px;
 }
+
+/* ─── AJAX states ─── */
+
+/* Honeypot — visually hidden from real users */
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Loading — dim the button while transmitting */
+.form-submit[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Inline error */
+.form-error {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(204, 26, 26, 0.4);
+  background: rgba(204, 26, 26, 0.06);
+  color: var(--neon-red);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+/* Success panel */
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 40px 0;
+  outline: none;
+}
+
+.form-success-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  color: var(--status-green);
+  font-size: 1.4rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.form-success-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--status-green);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+.form-success-body {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}

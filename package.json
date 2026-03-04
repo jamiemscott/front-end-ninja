@@ -4,7 +4,7 @@
   "description": "Front End Ninja — Jamie Scott cyberpunk portfolio",
   "type": "module",
   "scripts": {
-    "build": "gulp sass",
+    "build": "gulp compileSass",
     "watch": "gulp",
     "start": "gulp"
   },

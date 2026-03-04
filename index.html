@@ -420,43 +420,58 @@
             </div>
 
             <!-- Form column -->
-            <form name="contact-form" method="POST" netlify novalidate>
-              <div class="form-group">
-                <label class="form-label" for="contact-name">// Designation</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  autocomplete="name"
-                  placeholder="Your name"
-                  required
-                >
+            <div class="form-region">
+              <form name="contact-form" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+                <!-- Required for Netlify AJAX submission -->
+                <input type="hidden" name="form-name" value="contact-form">
+                <!-- Honeypot — hidden from real users, catches bots -->
+                <p class="form-honeypot" aria-hidden="true">
+                  <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+                </p>
+                <div class="form-group">
+                  <label class="form-label" for="contact-name">// Designation</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="contact-name"
+                    name="name"
+                    autocomplete="name"
+                    placeholder="Your name"
+                    required
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-email">// Communication Channel</label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="contact-email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="your@email.com"
+                    required
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-message">// Message Payload</label>
+                  <textarea
+                    class="form-input"
+                    id="contact-message"
+                    name="message"
+                    placeholder="Describe your project or opportunity..."
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn-primary form-submit">TRANSMIT MESSAGE</button>
+              </form>
+
+              <!-- Success message — shown after AJAX submission -->
+              <div class="form-success" id="form-success" hidden aria-live="polite" tabindex="-1">
+                <div class="form-success-icon" aria-hidden="true">✓</div>
+                <p class="form-success-title">TRANSMISSION COMPLETE</p>
+                <p class="form-success-body">Message received. I'll be in touch shortly.</p>
               </div>
-              <div class="form-group">
-                <label class="form-label" for="contact-email">// Communication Channel</label>
-                <input
-                  class="form-input"
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  autocomplete="email"
-                  placeholder="your@email.com"
-                  required
-                >
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="contact-message">// Message Payload</label>
-                <textarea
-                  class="form-input"
-                  id="contact-message"
-                  name="message"
-                  placeholder="Describe your project or opportunity..."
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn-primary form-submit">TRANSMIT MESSAGE</button>
-            </form>
+            </div>
 
           </div>
         </div>
@@ -482,6 +497,7 @@
 
   <!-- Custom cursor JS -->
   <script src="assets/scripts/cursor.js"></script>
+  <script src="assets/scripts/contact-form.js"></script>
 
 </body>
 </html>
