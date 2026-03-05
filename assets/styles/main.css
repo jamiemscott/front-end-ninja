@@ -6,6 +6,9 @@
 
 @layer open-props.vars, open-props.normalize, base, layout, modules, state;
 
+/* --- Fonts (unlayered — @font-face must be globally available) --- */
+@import "base/fonts.css";
+
 /* --- Vendor --- */
 @import url("https://unpkg.com/open-props") layer(open-props.vars);
 @import url("https://unpkg.com/open-props/normalize.min.css") layer(open-props.normalize);

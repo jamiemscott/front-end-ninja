@@ -60,8 +60,8 @@
   gap: 8px;
   padding: 14px 28px;
   background: transparent;
-  border: 1px solid rgba(255, 0, 128, 0.4);
-  color: rgba(255, 0, 128, 0.8);
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.75rem;
   letter-spacing: 0.1em;

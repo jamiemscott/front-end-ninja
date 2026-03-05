@@ -12,7 +12,19 @@
       "Bash(Select-Object -Last 20)",
       "WebFetch(domain:www.linkedin.com)",
       "WebFetch(domain:my.visualcv.com)",
-      "WebFetch(domain:rocketreach.co)"
+      "WebFetch(domain:rocketreach.co)",
+      "Bash(curl -L \"https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_960/code-ninja/code-ninja-bg-1.jpg\" -o \"C:/Users/jamie/OneDrive/Documents/GitHub/front-end-ninja/assets/images/code-ninja-bg-1.jpg\")",
+      "Bash(curl -s \"https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\")",
+      "Bash(curl -s -o \"orbitron.woff2\" \"https://fonts.gstatic.com/s/orbitron/v35/yMJRMIlzdpvBhQQL_Qq7dy0.woff2\")",
+      "Bash(curl -s -o \"rajdhani-300.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pasEfOreec.woff2\")",
+      "Bash(curl -s -o \"rajdhani-300-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pasEfOleef2kg.woff2\")",
+      "Bash(curl -s -o \"rajdhani-400.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDIxapCSOBg7S-QT7p4HM-Y.woff2\")",
+      "Bash(curl -s -o \"rajdhani-400-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDIxapCSOBg7S-QT7p4JM-aUWA.woff2\")",
+      "Bash(curl -s -o \"rajdhani-600.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pbYF_Oreec.woff2\")",
+      "Bash(curl -s -o \"rajdhani-600-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pbYF_Oleef2kg.woff2\")",
+      "Bash(curl -s -o \"rajdhani-700.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOreec.woff2\")",
+      "Bash(curl -s -o \"rajdhani-700-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOleef2kg.woff2\")",
+      "Bash(curl -s -o \"share-tech-mono.woff2\" \"https://fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2\")"
     ]
   }
 }
