@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KNBD5TF3TS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KNBD5TF3TS');
-</script>
-
-<!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-T86PJ57T');</script>
-<!-- End Google Tag Manager -->
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jamie Scott — Senior Front End Developer based in Leeds, UK. 13+ years specialising in WCAG accessibility, Content Management Systems, and OutSystems.">
@@ -32,6 +13,12 @@
 
   <!-- Favicon (ninja emoji) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥷</text></svg>">
+
+  <!-- Font preloads — critical above-the-fold faces fetched in parallel with CSS -->
+  <link rel="preload" href="assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/rajdhani-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/rajdhani-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/share-tech-mono.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Styles — bundled & minified via lightningcss (npm run build:css) -->
   <link rel="stylesheet" href="assets/styles/bundle.css">
@@ -188,6 +175,8 @@
                   <img
                     class="photo-img"
                     src="assets/images/code-ninja-bg-1.jpg"
+                    srcset="assets/images/code-ninja-bg-1-600.jpg 600w, assets/images/code-ninja-bg-1.jpg 960w"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     alt="Masked figure coding at a desk illuminated by a red and cyan neon cityscape"
                     width="960"
                     height="660"
@@ -605,6 +594,20 @@
   <script src="assets/scripts/cursor.js"></script>
   <script src="assets/scripts/contact-form.js"></script>
   <script src="assets/scripts/experience-detail.js" defer></script>
+
+  <!-- Google Analytics / GTM — deferred to end of body to avoid render blocking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNBD5TF3TS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KNBD5TF3TS');
+  </script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T86PJ57T');</script>
 
 </body>
 </html>

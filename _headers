@@ -1,0 +1,24 @@
+# Netlify cache headers
+
+# Fonts — immutable, cache for 1 year
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS bundle — cache for 1 year
+/assets/styles/bundle.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images — cache for 1 year
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# JS — cache for 1 year
+/assets/scripts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML — no cache (always fresh)
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache

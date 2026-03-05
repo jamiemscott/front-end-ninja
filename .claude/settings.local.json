@@ -26,7 +26,9 @@
       "Bash(curl -s -o \"rajdhani-700-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOleef2kg.woff2\")",
       "Bash(curl -s -o \"share-tech-mono.woff2\" \"https://fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2\")",
       "Bash(npm install --save-dev lightningcss-cli)",
-      "Bash(npm run build:css)"
+      "Bash(npm run build:css)",
+      "Bash(python3:*)",
+      "Bash(curl -s -o \"C:/Users/jamie/OneDrive/Documents/GitHub/front-end-ninja/assets/images/code-ninja-bg-1-600.jpg\" \"https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_600/code-ninja/code-ninja-bg-1.jpg\")"
     ]
   }
 }
