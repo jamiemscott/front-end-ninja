@@ -55,6 +55,22 @@
   margin-bottom: 40px;
 }
 
+/* Obfuscated email — address rendered via CSS attr(), href set by JS */
+.contact-email {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: color var(--transition-base), text-shadow var(--transition-base);
+
+  &::before { content: attr(data-u); }
+  &::after  { content: "@" attr(data-d); }
+
+  &:hover, &:focus-visible {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    outline: none;
+  }
+}
+
 /* Contact info list */
 .contact-info-list {
   list-style: none;

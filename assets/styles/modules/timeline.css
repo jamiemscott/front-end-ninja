@@ -15,7 +15,7 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple), var(--neon-red));
     box-shadow: 0 0 10px var(--neon-cyan);
   }
 }
@@ -88,6 +88,11 @@
 .timeline-dot--purple {
   background: var(--neon-purple);
   box-shadow: 0 0 0 4px rgba(200, 48, 255, 0.1), 0 0 15px var(--neon-purple);
+}
+
+.timeline-dot--red {
+  background: var(--neon-red);
+  box-shadow: 0 0 0 4px rgba(204, 26, 26, 0.1), 0 0 15px var(--neon-red);
 }
 
 .timeline-date {

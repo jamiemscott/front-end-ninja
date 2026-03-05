@@ -106,6 +106,14 @@ body::after {
 
 /* ─── Custom cursor ─── */
 
+/* Suppress ALL native cursors once JS confirms a fine pointer device */
+.has-custom-cursor *,
+.has-custom-cursor *::before,
+.has-custom-cursor *::after {
+  cursor: none !important;
+}
+
+/* ── Default dot ── */
 .cursor {
   position: fixed;
   width: 12px;
@@ -114,11 +122,21 @@ body::after {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.1s ease;
+  /* CSS handles centring — JS just sets left/top to exact mouse coords */
+  transform: translate(-50%, -50%);
   box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan);
   mix-blend-mode: screen;
+  overflow: visible; /* allow pseudo-element arms to extend beyond bounds */
+  transition:
+    width        0.12s ease,
+    height       0.12s ease,
+    border-radius 0.12s ease,
+    background   0.12s ease,
+    box-shadow   0.12s ease,
+    opacity      0.2s  ease;
 }
 
+/* ── Ring ── */
 .cursor-ring {
   position: fixed;
   width: 36px;
@@ -127,12 +145,109 @@ body::after {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition:
+    width        0.2s ease,
+    height       0.2s ease,
+    border-radius 0.2s ease,
+    border-color  0.2s ease,
+    transform    0.2s ease,
+    opacity      0.2s ease;
 }
 
-/* Restore default cursor when hovering interactive elements via JS,
-   but also ensure keyboard focus rings still show */
-:focus-visible {
-  outline: 2px solid var(--neon-cyan);
-  outline-offset: 3px;
+/* ══ CROSSHAIR STATE — interactive elements ══════════════════════════════ */
+
+.cursor--crosshair {
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan), 0 0 20px rgba(0, 245, 255, 0.6);
+
+  /* Left arm  (right arm via box-shadow)
+     Arms are 16px long, 8px gap on each side of the 4px centre square.
+     ::before left edge = element left − 8px gap − 16px arm = −24px        */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -24px;
+    width: 16px;
+    height: 1px;
+    transform: translateY(-50%);
+    background: var(--neon-cyan);
+    /* Right arm: shadow offset 36px = 16px arm + 4px elem + 16px arm (gaps absorbed)
+       Exact: from ::before left (−24px), right arm starts at elem right + 8px = 12px
+       → offset = 12 − (−24) = 36px                                        */
+    box-shadow:
+      0    0  6px rgba(0, 245, 255, 0.6),
+      36px 0  0   0   var(--neon-cyan),
+      36px 0  6px     rgba(0, 245, 255, 0.6);
+  }
+
+  /* Top arm  (bottom arm via box-shadow) — same geometry, rotated 90° */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -24px;
+    width: 1px;
+    height: 16px;
+    transform: translateX(-50%);
+    background: var(--neon-cyan);
+    box-shadow:
+      0 0    6px rgba(0, 245, 255, 0.6),
+      0 36px 0   0   var(--neon-cyan),
+      0 36px 6px     rgba(0, 245, 255, 0.6);
+  }
+}
+
+/* Ring morphs from circle → rotating diamond */
+.cursor-ring--crosshair {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  border-color: rgba(0, 245, 255, 0.55);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ══ TEXT / I-BEAM STATE — inputs and selectable copy ═══════════════════ */
+
+.cursor--text {
+  width: 2px;
+  height: 20px;
+  border-radius: 1px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px rgba(0, 245, 255, 0.4);
+
+  /* Top serif */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 10px;
+    height: 1px;
+    transform: translateX(-50%);
+    background: var(--neon-cyan);
+    box-shadow: 0 0 5px var(--neon-cyan);
+  }
+
+  /* Bottom serif */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    height: 1px;
+    transform: translateX(-50%);
+    background: var(--neon-cyan);
+    box-shadow: 0 0 5px var(--neon-cyan);
+  }
+}
+
+/* Ring disappears for text cursor — it would obscure the text */
+.cursor-ring--text {
+  opacity: 0;
 }

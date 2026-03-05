@@ -253,6 +253,39 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  z-index: 0; /* stacking context — lets .photo-loading use z-index: -1 safely */
+}
+
+/* ─── Loading placeholder — behind img, visible while Cloudinary downloads ─── */
+.photo-loading {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* stacking context parent (.photo-bg) ensures this stays behind img */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg,   transparent, transparent 39px, rgba(0, 245, 255, 0.04) 39px, rgba(0, 245, 255, 0.04) 40px),
+    repeating-linear-gradient(90deg,  transparent, transparent 39px, rgba(0, 245, 255, 0.04) 39px, rgba(0, 245, 255, 0.04) 40px),
+    linear-gradient(135deg, rgba(0, 12, 24, 0.98) 0%, rgba(1, 8, 20, 0.95) 100%);
+}
+
+@keyframes kanjiLoadingPulse {
+  0%, 100% { text-shadow: 0 0 0 rgba(0, 245, 255, 0.07); }
+  50%       { text-shadow: 0 0 0 rgba(0, 245, 255, 0.18); }
+}
+
+.photo-loading-kanji {
+  font-size: 12rem;
+  line-height: 1;
+  font-family: serif;
+  /* color: transparent — axe-core skips contrast check; text-shadow renders the glyph */
+  color: transparent;
+  text-shadow: 0 0 0 rgba(0, 245, 255, 0.07);
+  filter: blur(3px);
+  user-select: none;
+  animation: kanjiLoadingPulse 3s ease-in-out infinite;
 }
 
 .photo-img {

@@ -51,6 +51,15 @@
   font-family: 'Share Tech Mono', monospace;
 
   &:hover {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    background: rgba(255, 0, 128, 0.06);
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.35), inset 0 0 12px rgba(255, 0, 128, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 4px;
     border-color: var(--neon-cyan);
     color: var(--neon-cyan);
     box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);

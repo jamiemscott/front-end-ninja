@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  /* ── Obfuscated email links — assemble mailto: from data attributes ── */
+  document.querySelectorAll('.contact-email').forEach(function (el) {
+    el.href = 'mailto:' + el.dataset.u + '@' + el.dataset.d;
+  });
+
   const form = document.querySelector('form[name="contact-form"]');
   if (!form) return;
 
