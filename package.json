@@ -1,5 +1,12 @@
 {
   "name": "cyberpunk-portfolio",
   "version": "3.2.0",
-  "description": "Front End Ninja — Jamie Scott cyberpunk portfolio"
+  "description": "Front End Ninja — Jamie Scott cyberpunk portfolio",
+  "scripts": {
+    "build:css": "lightningcss --bundle --minify assets/styles/main.css -o assets/styles/bundle.css",
+    "watch:css": "lightningcss --bundle --minify --watch assets/styles/main.css -o assets/styles/bundle.css"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.31.1"
+  }
 }

@@ -24,7 +24,9 @@
       "Bash(curl -s -o \"rajdhani-600-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pbYF_Oleef2kg.woff2\")",
       "Bash(curl -s -o \"rajdhani-700.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOreec.woff2\")",
       "Bash(curl -s -o \"rajdhani-700-ext.woff2\" \"https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOleef2kg.woff2\")",
-      "Bash(curl -s -o \"share-tech-mono.woff2\" \"https://fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2\")"
+      "Bash(curl -s -o \"share-tech-mono.woff2\" \"https://fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2\")",
+      "Bash(npm install --save-dev lightningcss-cli)",
+      "Bash(npm run build:css)"
     ]
   }
 }
