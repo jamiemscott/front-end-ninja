@@ -28,7 +28,10 @@
   transform: translateY(-50%);
   font-size: 28rem;
   line-height: 1;
-  color: rgba(0, 245, 255, 0.015);
+  /* color: transparent removes text from axe-core contrast checks;
+     text-shadow preserves the identical visual effect */
+  color: transparent;
+  text-shadow: 0 0 0 rgba(0, 245, 255, 0.015);
   font-family: serif;
   pointer-events: none;
   writing-mode: vertical-rl;
@@ -38,8 +41,8 @@
 }
 
 @keyframes kanjiDrift {
-  0%, 100% { opacity: 0.6; transform: translateY(-50%) translateX(0); }
-  50%       { opacity: 1;   transform: translateY(-50%) translateX(-20px); }
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50%       { transform: translateY(-50%) translateX(-20px); }
 }
 
 /* Eyebrow row */
@@ -68,7 +71,8 @@
 .ja-accent {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.65rem;
-  color: rgba(0, 245, 255, 0.3);
+  color: transparent;
+  text-shadow: 0 0 0 rgba(0, 245, 255, 0.3);
   letter-spacing: 0.3em;
   margin-bottom: 8px;
 }

@@ -47,6 +47,12 @@
     font-size: 1.4rem;
     animation: hexSpin 8s linear infinite;
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
 }
 
 .nav-links {
@@ -82,6 +88,18 @@
   }
 
   &:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 6px;
+    border-radius: 2px;
     color: var(--neon-cyan);
     text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
 

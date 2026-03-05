@@ -43,6 +43,14 @@
       transform: translateX(100%);
     }
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 4px;
+    background: rgba(0, 245, 255, 0.08);
+    box-shadow: 0 0 24px rgba(0, 245, 255, 0.6), inset 0 0 20px rgba(0, 245, 255, 0.1);
+    color: #fff;
+  }
 }
 
 /* Secondary — pink neon border */
@@ -65,6 +73,15 @@
   &:hover {
     background: rgba(255, 0, 128, 0.08);
     box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-pink);
+    outline-offset: 4px;
+    background: rgba(255, 0, 128, 0.08);
+    box-shadow: 0 0 24px rgba(255, 0, 128, 0.5);
     color: var(--neon-pink);
     border-color: var(--neon-pink);
   }

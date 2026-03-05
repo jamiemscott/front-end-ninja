@@ -60,6 +60,12 @@
   /* Remove native disclosure triangle across all browsers */
   &::-webkit-details-marker { display: none; }
   &::marker { display: none; }
+
+  &:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: -6px;
+    box-shadow: inset 0 0 0 2px rgba(0, 245, 255, 0.15);
+  }
 }
 
 /* Dot on the spine */
