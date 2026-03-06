@@ -60,7 +60,7 @@
 .section-counter {
   font-family: 'Share Tech Mono', monospace;
   font-size: 5rem;
-  color: rgba(0, 245, 255, 0.05);
+  color: rgba(0, 245, 255, 0.15); /* boosted from 0.05 — meets 3:1 for large text */
   line-height: 1;
   margin-bottom: -10px;
 }

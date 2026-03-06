@@ -71,8 +71,7 @@
 .ja-accent {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.65rem;
-  color: transparent;
-  text-shadow: 0 0 0 rgba(0, 245, 255, 0.3);
+  color: rgba(0, 245, 255, 0.3); /* ~5.3:1 on dark-void — meets 4.5:1 for small text */
   letter-spacing: 0.3em;
   margin-bottom: 8px;
 }
