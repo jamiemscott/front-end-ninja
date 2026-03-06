@@ -28,7 +28,8 @@
       "Bash(npm install --save-dev lightningcss-cli)",
       "Bash(npm run build:css)",
       "Bash(python3:*)",
-      "Bash(curl -s -o \"C:/Users/jamie/OneDrive/Documents/GitHub/front-end-ninja/assets/images/code-ninja-bg-1-600.jpg\" \"https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_600/code-ninja/code-ninja-bg-1.jpg\")"
+      "Bash(curl -s -o \"C:/Users/jamie/OneDrive/Documents/GitHub/front-end-ninja/assets/images/code-ninja-bg-1-600.jpg\" \"https://res.cloudinary.com/jamie-scott-co-uk/image/upload/c_scale,w_600/code-ninja/code-ninja-bg-1.jpg\")",
+      "WebFetch(domain:front-end-ninja.co.uk)"
     ]
   }
 }
