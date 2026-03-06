@@ -58,12 +58,13 @@
 
 @container nav (max-width: 720px) {
 
-  /* ── Top bar: logo left, status + hamburger right ── */
+  /* ── Top bar: logo left, hamburger right ── */
   .site-nav {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 16px;
+    padding-inline: 20px;
   }
 
   /* Allow logo text to truncate rather than overflow the 1fr track */
@@ -76,11 +77,8 @@
   /* Hide desktop nav links — they live in the drawer on mobile */
   .nav-links { display: none; }
 
-  /* Status shrinks a touch */
-  .nav-status {
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-  }
+  /* Hide status from header on mobile — it's visible in the drawer */
+  .nav-status { display: none; }
 
   /* ── Hamburger button ── */
   .nav-hamburger {

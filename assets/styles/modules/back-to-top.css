@@ -74,8 +74,12 @@
   text-decoration: none;
   color: var(--neon-cyan);
 
-  /* Scroll-driven reveal — element emerges as user scrolls past the hero */
-  animation: btt-reveal linear both;
+  /* Scroll-driven reveal — element emerges as user scrolls past the hero.
+     Written as longhands to prevent lightningcss merging scroll() into the
+     animation shorthand, which Chrome does not support. */
+  animation-name: btt-reveal;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
   animation-timeline: scroll(root);
   animation-range: 70vh 95vh;
 
